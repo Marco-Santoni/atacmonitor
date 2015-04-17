@@ -1,16 +1,17 @@
 import dotenv
 import os
-try:
-  # Python 2 import
-  from xmlrpclib import Server
-except ImportError:
-  # Python 3 import
-  from xmlrpc.client import Server
+import datetime
+
+# Python 2 import
+from xmlrpclib import Server
 
 try:
     PROJECT_PATH = os.path.dirname(os.path.dirname(__file__))
     dotenv.load_dotenv(os.path.join(PROJECT_PATH, ".env"))
 except Exception:
+    pass
+
+def save(line, minutes, measured_at):
     pass
 
 DEV_KEY = os.environ.get('DEV_KEY')
@@ -20,6 +21,14 @@ s2 = Server('http://muovi.roma.it/ws/xml/paline/7')
 
 token = s1.autenticazione.Accedi(DEV_KEY, '')
 
+now = datetime.datetime.utcnow()
+
 res = s2.paline.Previsioni(token, '71427', 'it')
-for a in res['risposta']['arrivi']:
-    print a['linea']
+for p in res['risposta']['primi_per_palina']:
+    for a in p[0]['arrivi']:
+        line = a['linea']
+        if 'nessun_autobus' in a:
+            minutes = None
+        else:
+            minutes = a['tempo_attesa']
+        save(line, minutes, now)
