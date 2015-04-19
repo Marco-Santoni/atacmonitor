@@ -1,0 +1,17 @@
+<h1>Listing arrivals</h1>
+
+<table>
+  <tr>
+    <th>Line</th>
+    <th>Minutes</th>
+    <th>Measured at</th>
+  </tr>
+
+  <% @arrivals.each do |arrival| %>
+    <tr>
+      <td><%= arrival.line %></td>
+      <td><%= arrival.minutes %></td>
+      <td><%= arrival.created_at %></td>
+    </tr>
+  <% end %>
+</table>
