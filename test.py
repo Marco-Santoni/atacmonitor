@@ -12,6 +12,7 @@ except Exception:
     pass
 
 def save(line, minutes, measured_at):
+    print line, minutes, measured_at
     pass
 
 DEV_KEY = os.environ.get('DEV_KEY')
@@ -22,13 +23,16 @@ s2 = Server('http://muovi.roma.it/ws/xml/paline/7')
 token = s1.autenticazione.Accedi(DEV_KEY, '')
 
 now = datetime.datetime.utcnow()
+rome_now = now + datetime.timedelta(hours=2)
 
 res = s2.paline.Previsioni(token, '71427', 'it')
 for p in res['risposta']['primi_per_palina']:
-    for a in p[0]['arrivi']:
+    print 'Arrivi: ', len(p)
+    for a in p['arrivi']:
         line = a['linea']
         if 'nessun_autobus' in a:
             minutes = None
         else:
             minutes = a['tempo_attesa']
-        save(line, minutes, now)
+            
+        save(line, minutes, rome_now)
