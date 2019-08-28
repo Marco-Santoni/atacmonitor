@@ -28,6 +28,6 @@ This is the longest waiting time in minutes shown at a bus station.
 
 You can contact me for info about the dataset or if you want to contribute to the reporting statistics.
 
-- [GitHub](github.com/Marco-Santoni/atacmonitor)
-- [LinkedIn](linkedin.com/in/msantoni)
+- [GitHub](https://github.com/Marco-Santoni/atacmonitor)
+- [LinkedIn](https://linkedin.com/in/msantoni)
 - [Twitter](https://twitter.com/mrsantoni)
